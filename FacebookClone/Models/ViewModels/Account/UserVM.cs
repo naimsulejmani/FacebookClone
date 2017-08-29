@@ -19,7 +19,7 @@ namespace FacebookClone.Models.ViewModels.Account
             Id = row.Id;
             FirstName = row.FirstName;
             LastName = row.LastName;
-            EmailAddress = row.EmailAddress;
+            EmailAddress = row.Email;
             Username = row.Username;
             Password = row.Password;
         }

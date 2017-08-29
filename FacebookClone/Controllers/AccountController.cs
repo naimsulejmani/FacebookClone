@@ -48,7 +48,7 @@ namespace FacebookClone.Controllers
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                EmailAddress = model.EmailAddress,
+                Email = model.EmailAddress,
                 Password = model.Password,
                 Username = model.Username
             };
@@ -58,9 +58,9 @@ namespace FacebookClone.Controllers
 
             int userId = userDTO.Id;
 
-            FormsAuthentication.SetAuthCookie(model.Username, true);
+            FormsAuthentication.SetAuthCookie(model.Username, false);
 
-            var uploadsDir = new DirectoryInfo(string.Format("{0}Uploads", Server.MapPath(@"\")));
+            var uploadsDir = new DirectoryInfo($"{Server.MapPath(@"\")}Uploads");
              
             if (file != null && file.ContentLength > 0)
             {
@@ -99,7 +99,7 @@ namespace FacebookClone.Controllers
             //return RedirectToAction("Username", new {username = model.Username});
             return Redirect("~/" + model.Username);
         }
-
+        [Authorize]
         // GET: /{username}
         public string Username(string username = "")
         {
