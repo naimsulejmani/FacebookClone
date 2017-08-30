@@ -99,11 +99,33 @@ namespace FacebookClone.Controllers
             //return RedirectToAction("Username", new {username = model.Username});
             return Redirect("~/" + model.Username);
         }
-        [Authorize]
+
+
         // GET: /{username}
-        public string Username(string username = "")
+        [Authorize]
+        public ActionResult Username(string username = "")
         {
-            return username;
+
+            Db db = new Db();
+
+            //check if user exitsts
+            if (!db.Users.Any(x => x.Username.Equals(username)))
+            {
+                return Redirect("~/"); 
+            }
+
+            ViewBag.Username = username;
+
+            string user = User.Identity.Name;
+
+            UserDTO userDTO = db.Users.FirstOrDefault(x => x.Username.Equals(user));
+            ViewBag.FullName = userDTO.FirstName + " " + userDTO.LastName;
+
+
+            UserDTO userDTO2 = db.Users.FirstOrDefault(x => x.Username.Equals(username));
+            ViewBag.ViewingFullName = userDTO2.FirstName + " " + userDTO2.LastName;
+            ViewBag.UsernameImage = userDTO2.Id + ".jpg";
+            return View();
         }
         [Authorize]
         //GET: account/Logout
@@ -111,6 +133,27 @@ namespace FacebookClone.Controllers
         {
             FormsAuthentication.SignOut();
             return Redirect("~/");
+        }
+
+        public ActionResult LoginPartial()
+        {
+            return PartialView();
+        }
+
+        // POST: account/Login
+        [HttpPost]
+        public string Login(string username, string password)
+        {
+            //init db
+            Db db = new Db();
+            //chec if exists
+            if (db.Users.Any(x => x.Username.Equals(username) && x.Password.Equals(password)))
+            {
+                FormsAuthentication.SetAuthCookie(username,false);
+                return "ok";
+            }
+            return "problem";
+            //log in
         }
     }
 }

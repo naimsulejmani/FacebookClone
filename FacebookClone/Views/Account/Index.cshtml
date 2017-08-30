@@ -19,12 +19,12 @@
             <div class="container">
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>partial view here</li>
+                        <li>@Html.Action("LoginPartial","Account")</li>
                     </ul>
                 </div>
             </div>
         </div>
-
+        <h1>Facebook Clone</h1>
         <div class="row">
             <div class="col-xs-12">
 
@@ -89,7 +89,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
+                                <input type="submit" value="Login" class="btn btn-default" />
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,37 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+
+        /*
+         login form ajax
+     */
+        $("form#loginform").submit(function(e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            $this.find(".ajaxdiv").removeClass('hide');
+
+            var username = $("#Username").val();
+            var password = $("#Password").val();
+            var url = "/account/Login";
+            $.post(url,
+                { username: username, password: password },
+                function(data) {
+                    var response = data.trim();
+
+                    if (response == "ok") {
+                        document.location.href = "/";
+                    } else {
+                        $this.find('.ajaxdiv').addClass('hide');
+                        $("div.em").fadeIn('fast');
+                        setTimeout(function() {
+                            $("div.em").fadeOut('fast');
+                        }, 2000);
+                    }
+                });
+        });
+
         /*
             Priview selected image
         */

@@ -1,13 +1,13 @@
-﻿body {
+﻿/*body {
     padding-top: 50px;
     padding-bottom: 20px;
-}
+}*/
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+/*.body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
+}*/
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -21,4 +21,93 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+.form-horizontal.loginform {
+    color: white !important;
+    position: relative;
+ 
+}
+
+
+.form-horizontal.loginform  label{
+    color: white !important;  
+}
+
+
+.form-horizontal.loginform > div.form-group{
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+div.em {
+    position: absolute;
+    right: -330px;
+    bottom: -10px;
+    z-index: 1;
+    display: none;
+}
+
+#loginform {
+    position: relative;
+}
+
+#loginform .ajaxdiv {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;   
+}
+
+li.livesearchli {
+    width: 300px;
+    display: block;
+    padding: 10px;
+    position: relative;
+    
+}
+
+input#searchtext {
+    position: relative;
+    margin-top: 7px;
+    margin-left: 100px;
+    padding: 5px 10px;
+    top: -5px;
+}
+
+li.livesearchli img {
+    width: 50px;
+}
+
+ul#livesearchul {
+    position: absolute;
+    background: #222;
+    right: -10px;
+    top: 70px;
+    padding: 0;
+
+}
+
+ul#livesearchul li.close {
+    position: absolute;
+    color: white;
+    opacity: 1 !important;
+    right: 10px;
+    list-style: none;
+    top: 0;
+    cursor: pointer;
+    z-index: 10;
+
+}
+
+.userimg img {
+    width: 200px;
+}
+
+li.name {
+    display: block;
+    color: white;
+    margin: 0 10px;
+    margin-top: 15px;
 }
